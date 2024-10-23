@@ -1,0 +1,20 @@
+name: Compile and Run C Program
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Install GCC
+        run: sudo apt-get install gcc
+
+      - name: Compile the C program
+        run: gcc -o compounding_calculator compounding_calculator.c
+
+      - name: Run the program
+        run: ./compounding_calculator
