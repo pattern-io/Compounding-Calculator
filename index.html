@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compounding Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f5;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .calculator {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compounding Calculator</h1>
+    <div class="calculator">
+        <label for="initialCapital">Initial Capital:</label>
+        <input type="number" id="initialCapital" placeholder="Enter initial capital" required>
+        
+        <label for="dailyProfitRate">Daily Profit Rate (%):</label>
+        <input type="number" id="dailyProfitRate" step="0.01" placeholder="Enter daily profit rate" required>
+        
+        <label for="days">Number of Days:</label>
+        <input type="number" id="days" placeholder="Enter number of days" required>
+        
+        <button onclick="calculateCompoundedProfit()">Calculate</button>
+        
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateCompoundedProfit() {
+            let initialCapital = parseFloat(document.getElementById('initialCapital').value);
+            let dailyProfitRate = parseFloat(document.getElementById('dailyProfitRate').value) / 100;
+            let days = parseInt(document.getElementById('days').value);
+            let capital = initialCapital;
+
+            let resultText = `<h3>Results</h3>`;
+            for (let i = 1; i <= days; i++) {
+                capital = capital * (1 + dailyProfitRate);
+                resultText += `Day ${i}: Capital = ${capital.toFixed(2)}<br>`;
+            }
+
+            resultText += `<br><strong>Initial Capital:</strong> ${initialCapital.toFixed(2)}<br>`;
+            resultText += `<strong>Final Capital after ${days} days:</strong> ${capital.toFixed(2)}<br>`;
+            resultText += `<strong>Total Profit:</strong> ${(capital - initialCapital).toFixed(2)}<br>`;
+
+            document.getElementById('result').innerHTML = resultText;
+        }
+    </script>
+</body>
+</html>
